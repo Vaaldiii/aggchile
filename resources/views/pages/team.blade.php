@@ -31,24 +31,31 @@
 
         }
 
+        .partner .col-sm-4{
+            padding-left:0px !important;
+        }
+
         .partner-img{
-            width: 200px;
+            width: 100%;
         }
 
         .partner-info{
             background-color: #135987;
             padding: 5px 10px;
             color: white;
-            margin-bottom: 10px;
-            border-radius: 10px;;
+            margin-bottom: 0px;
+            border-radius: 0px;
         }
-
         .partner-title{
             font-size: 11px;
         }
 
         .partner-description{
             font-size: 16px;
+        }
+
+        .cv-btn{
+            border-radius: 0px !important;
         }
 
 
@@ -73,6 +80,16 @@
             margin: 15px auto 60px;
         }
 
+        .flip .back {
+            background: rgba(250, 250, 250, 0.58);
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .partner-row{
+            margin-bottom: 20px;
+        }
+
     </style>
 @endsection
 
@@ -84,28 +101,28 @@
     </div>
     <div class="row description-container">
         <div class="col-sm-9 whoweare-container">
-
+            <div class="partner">
             @foreach ($partners as $partner)
-                <div class="partner row">
-                    <div class="col-sm-4 text-center">
+                    <div class="col-sm-4 text-center partner-container">
                         <div class="partner-info text-left">
                             <p class="partner-name text-uppercase">{{ $partner->name }}</p>
                             <p class="partner-title text-uppercase">{{ $partner->degree }}</p>
                         </div>
-                        <img src="{{ URL::to("/img/team/".$partner->image) }}" alt="{{ $partner->name }}" class="img-circle partner-img">
-                        <br><br>
+                        <div class="flip">
+                            <div class="front">
+                                <img src="{{ URL::to("/img/team/".$partner->image) }}" alt="{{ $partner->name }}" class="img-rectangle partner-img">
+                            </div>
+                            <div class="back .text-truncate">
+                                {{ $partner->description }}
+                            </div>
+                        </div>
+
                         @if($partner->cv)
-                            <a href="{{ url('/team/'.$partner->cv) }}" class="btn btn-success btn-xs">Curriculum Vitae</a>
+                            <a href="{{ url('/team/'.$partner->cv) }}" class="btn btn-success btn-sm btn-block cv-btn">Curriculum Vitae</a>
                         @endif
                     </div>
-                    <div class="col-sm-8 partner-description">
-                        {{ $partner->description }}
-                    </div>
-                </div>
-                <hr class="team-separator">
-
             @endforeach
-
+            </div>
         </div>
         <div class="col-sm-3 hidden-xs">
             <img src="{{ url('/template/equipo-texto.jpg') }}" alt="" class="img-responsive">
@@ -117,5 +134,21 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/jquery.flip.min.js"></script>
+    <script>
+        $(function(){
+            var divs = $(".partner-container");
+            for(var i = 0; i < divs.length; i+=3) {
+                divs.slice(i, i+3).wrapAll("<div class='row partner-row'></div>");
+            }
+            var dim = $(".partner-img").first().width();
+            $(".flip").height(dim).width(dim);
+            $(".flip").flip({
+                trigger: 'hover',
+                speed: 700,
+                autoSize: true
+            });
 
+        });
+    </script>
 @endsection
