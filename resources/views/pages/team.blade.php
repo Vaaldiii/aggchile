@@ -108,7 +108,7 @@
 
         </div>
         <div class="col-sm-3 hidden-xs">
-            <img src="{{ url('/img/equipo-texto.jpg') }}" alt="" class="img-responsive">
+            <img src="{{ url('/template/equipo-texto.jpg') }}" alt="" class="img-responsive">
         </div>
     </div>
     <div>
