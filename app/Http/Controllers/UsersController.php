@@ -40,26 +40,18 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->update($request->except(['image', 'password']));
-        $error = true;
 
         if($request->image){
             if($user->image != ""){
                 $photoname = $user->image;
             }else{
                 $photoname = uniqid().".jpg";
+                $user->image = $photoname;
+                $user->save();
             }
-            if(Image::make(Input::file('image'))->resize(400, 400)->save("img/users/".$photoname)){
-                $error = false;
-            }
-        }else{
-            $error = false;
+            Image::make(Input::file('image'))->resize(400, 400)->save("img/users/".$photoname);
         }
-
-        if($error){
-            return redirect(url('home/user/profile'))->withInput()->withErrors(['message' => 'Ups! Ha ocurrido un error, por favor intente nuevamente']);
-        }else{
-            return redirect(url('home/user/profile'))->with('success', 'Perfil actualizado Exitosamente!');    
-        }
+        return redirect(url('home/user/profile'))->with('success', 'Perfil actualizado Exitosamente!');
     }
 
     /**
