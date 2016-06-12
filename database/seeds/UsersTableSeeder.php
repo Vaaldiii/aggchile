@@ -16,14 +16,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@agg.cl',
             'password' => bcrypt('123456'),
         ]);
-
-        for($i = 0; $i<15; $i++){
-            DB::table('users')->insert([
-                'name' => str_random(10),
-                'email' => str_random(10).'@agg.cl',
-                'password' => bcrypt('secret'),
-            ]);
-        }
-
     }
 }
