@@ -7,7 +7,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
 
-            <p class="centered"><a href="home/user/profile">
+            <p class="centered"><a href="/home/user/profile">
                 @if($user->image)
                     <img src="/img/users/{{ $user->image }}" class="img-circle" width="60"></a>
                 @else

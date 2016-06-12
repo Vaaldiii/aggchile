@@ -43,7 +43,7 @@ class UsersController extends Controller
         $error = true;
 
         if($request->image){
-            if($user->image){
+            if($user->image != ""){
                 $photoname = $user->image;
             }else{
                 $photoname = uniqid().".jpg";

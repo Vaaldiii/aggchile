@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="css/organizational.css">
     <style>
         .site-title{
-            background-image: url('{{ url('/img/equipo.jpg') }}');
+            background-image: url('{{ url('/template/equipo.jpg') }}');
             background-size: cover;
             background-position: 0% 70%;
         }
@@ -57,7 +57,7 @@
         }
         .org-tree{
             padding: 40px 70px;
-            background-image: url("{{ url('/img/cartographer.png') }}");
+            background-image: url("{{ url('/template/cartographer.png') }}");
             color: #0F486E;
         }
         .org-tree img{
